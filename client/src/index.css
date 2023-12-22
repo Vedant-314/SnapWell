@@ -22,6 +22,25 @@ input:focus{
     border: 1px solid gray !important;
 }
 
+.spinner-parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: rgb(228, 217, 255, 0.74);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: #273469;
+    z-index: 9999;
+}
+
+.spinner-grow{
+    width: 4rem;
+    height: 4rem;
+}
+
 label{
     font-size: 16px !important;
     color: black !important;
@@ -43,6 +62,7 @@ label{
 .primary-button:hover{
     opacity: 0.8 !important;
 }
+
 
 .anchor{
     color: black;
