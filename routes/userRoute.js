@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
+const Doctor = require("../models/doctorModel")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 const authMiddleware = require("../middlewares/authMiddleware")
@@ -49,18 +50,43 @@ router.post("/login", async (req, res) => {
 router.post('/get-user-info-by-id', authMiddleware, async(req,res)=>{
     try{
         const user = await User.findOne({_id: req.body.userId});
+        user.password = undefined;
         if(!user){
             return res.status(200).send({message: "User does not exist", success: false});
         }
         else{
-            res.status(200).send({success: true, data: {
-                name: user.name,
-                email: user.email,
-            }})
+            res.status(200).send({success: true,
+                data: user
+            })
         }
     }catch(error){
         res.status(500).send({message: "Error getting user info", success: false, error})
     }
-})
+});
+
+router.post("/apply-doctor-account", authMiddleware,  async (req, res) => {
+    try {
+        const newDoctor = new Doctor({...req.body, status: "pending"});
+        await newDoctor.save();
+
+        const adminUser = await User.findOne({ isAdmin: true});
+        const unseenNotifications = adminUser.unseenNotifications
+        unseenNotifications.push({
+            type: "new-doctor-request",
+            message: `${newDoctor.firstName} ${newDoctor.lastName} applied for doctor account`,
+            data: {
+                doctorId: newDoctor._id,
+                name : newDoctor.firstName + " " + newDoctor.lastName 
+            },
+            onClickPath: "/admin/doctors"
+        })
+        await User.findByIdAndUpdate(adminUser._id, {unseenNotifications});
+        res.status(200).send({message: "Doctor account applied successfully!", success: true});
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: "Error applying", success: false, error });
+    }
+});
+
 
 module.exports = router;

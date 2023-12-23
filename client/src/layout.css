@@ -46,6 +46,7 @@
     box-shadow: 0 0 2px gray;
     height: 82vh;
     width: 100%;
+    padding: 15px;
 }
 
 .menu{
@@ -56,6 +57,18 @@
     margin-top: 30px;
     margin-right: 0;
     padding: 0;
+}
+
+.ant-badge-count{
+    min-width: 15px !important;
+    height: 15px !important;
+    line-height: 15px !important;
+    background-color: #E4D9FF !important;
+    color: #273469 !important;
+}
+
+.ant-badge{
+    width: 35px !important;
 }
 
 .menu-item a{

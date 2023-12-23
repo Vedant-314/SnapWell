@@ -16,7 +16,7 @@ input{
     height: 40px !important;
 }
 
-input:focus{
+input:focus, .ant-picker{
     outline: none !important;
     box-shadow: none !important;
     border: 1px solid gray !important;
@@ -63,6 +63,22 @@ label{
     opacity: 0.8 !important;
 }
 
+.ant-picker-input input{
+    border: none !important;
+}
+
+.ant-picker{
+    height: 40px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(128, 128, 128, 0.521) !important;
+    height: 40px !important;
+}
+
+.page-title{
+    font-size: 25px;
+    color: #273469;
+    font-weight: bold;
+}
 
 .anchor{
     color: black;
