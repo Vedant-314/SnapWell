@@ -88,5 +88,38 @@ router.post("/apply-doctor-account", authMiddleware,  async (req, res) => {
     }
 });
 
+router.post("/mark-all-notifications-as-seen", authMiddleware,  async (req, res) => {
+    try {
+        const user = await User.findOne({_id : req.body.userId});
+        const seenNotifications = user.seenNotifications;  
+        const unseenNotifications = user.unseenNotifications;
+        seenNotifications.push(...unseenNotifications);
+        user.unseenNotifications = [];
+        user.seenNotifications = seenNotifications;
+        const updatedUser = await user.save();
+        updatedUser.password = undefined;
+
+        res.status(200).send({message: "All notifications marked as seen", success: true, data: updatedUser})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: "Error marking the notifications", success: false, error });
+    }
+});
+
+router.post("/delete-all-notifications", authMiddleware,  async (req, res) => {
+    try {
+        const user = await User.findOne({_id : req.body.userId});
+        user.seenNotifications = [];
+        const updatedUser = await user.save();
+        updatedUser.password = undefined;
+        res.status(200).send({message: "All notifications marked as seen", success: true, data: updatedUser})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: "Error marking the notifications", success: false, error });
+    }
+});
+
 
 module.exports = router;
