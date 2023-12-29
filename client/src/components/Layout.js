@@ -42,12 +42,12 @@ function Layout({children}) {
     },
     {
         name: "Users",
-        path: "/users",
+        path: "/admin/userslist",
         icon: "ri-team-line"
     },
     {
         name: "Doctors",
-        path: "/doctors",
+        path: "/admin/doctorslist",
         icon: "ri-health-book-line"
     },
     {
@@ -57,16 +57,34 @@ function Layout({children}) {
     },
     
   ];
+  const doctorMenu = [
+    {
+        name: 'Home',
+        path: '/',
+        icon: 'ri-home-line'
+    },
+    {
+        name: "Appointments",
+        path: "/admin/userslist",
+        icon: "ri-team-line"
+    },
+    {
+        name: 'Profile',
+        path: `/doctor/profile/${user?._id}`,
+        icon: 'ri-user-line'
+    },
+    
+  ];
 
-  const menuToBeRendered = user?.isAdmin ? adminMenu : userMenu;
-
+  const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
+  const role = user?.isAdmin ? "ADMIN" : user?.isDoctor ? "DOCTOR" : "USER";
   return (
     <div className='main'>
         <div className='d-flex layout'>
             <div className={`${collapsed ? 'collapsed-sidebar': 'sidebar'}`}>
                 <div className='sidebar-header'>
                     {!collapsed ? <img src={logo} alt="logo"/> : <img src={logoC} alt="logo"></img> }
-                    
+                    <h1 className='role'>{role}</h1>
                 </div>
                 <div className='menu'>
                     {menuToBeRendered.map((menu) =>{
