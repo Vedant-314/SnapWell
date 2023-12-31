@@ -8,6 +8,7 @@
     "npm": "8.5.5"
   },
   "scripts": {
+    "build": "npm run build",
     "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
