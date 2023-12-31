@@ -10,6 +10,7 @@ function Layout({children}) {
     const {user} = useSelector((state) => state.user);
     const navigate = useNavigate();
 
+    
     const location = useLocation();
   const userMenu = [
     {
@@ -29,7 +30,7 @@ function Layout({children}) {
     },
     {
         name: 'Profile',
-        path: '/profile',
+        path: '/userprofile',
         icon: 'ri-user-line'
     },
   ];
@@ -76,6 +77,11 @@ function Layout({children}) {
     
   ];
 
+  const goTo = (menu) =>{
+    navigate(menu.path)
+}
+
+
   const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
   const role = user?.isAdmin ? "ADMIN" : user?.isDoctor ? "DOCTOR" : "USER";
   return (
@@ -90,7 +96,7 @@ function Layout({children}) {
                     {menuToBeRendered.map((menu) =>{
                         const isActive = location.pathname === menu.path
                         return <div className= {`d-flex menu-item ${isActive && 'active-menu-item'}`}>
-                            <i className={menu.icon}></i>
+                            <i onClick={()=> navigate(menu.path)} className={menu.icon}></i>
                             {!collapsed && <Link to={menu.path} >{menu.name}</Link>}
                         </div>
                     })}
@@ -111,7 +117,7 @@ function Layout({children}) {
                         <Badge count={user?.unseenNotifications.length} onClick={() => navigate("/notifications")}>
                             <i className='ri-notification-line header-icon px-3'></i>
                         </Badge>
-                        <Link className='anchor mx-3' to="/profile">{user?.name}</Link>
+                        <Link className='anchor mx-3 fontColor' to={"/userprofile"}>{user?.name}</Link>
                     </div>
                 </div>
                 <div className='body'>

@@ -31,7 +31,7 @@ function Doctor({ doctor }) {
       </p>
       <p>
         <b>Timings: </b>
-        {doctor.timings[0]} {doctor.timings[1]}
+        {doctor.timings[0]} - {doctor.timings[1]}
       </p>
     </div>
   );
