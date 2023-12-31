@@ -5,6 +5,7 @@ import { hideLoading, showLoading } from '../../redux/alertsSlice';
 import axios from "axios";
 import { Table } from 'antd';
 import { toast } from 'react-hot-toast';
+import dayjs from 'dayjs';
 
 function DoctorsList() {
 
@@ -66,7 +67,9 @@ function DoctorsList() {
         },
         {
             title: 'Created at',
-            dataIndex: 'createdAt'
+            dataIndex: 'createdAt',
+            render: (record, text) => dayjs(record.createdAt).format("DD-MM-YYYY")
+
         },
         {
             title: 'Status',

@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import { hideLoading, showLoading } from '../../redux/alertsSlice';
 import axios from "axios"
 import { Table } from 'antd';
+import dayjs from 'dayjs';
 
 function UsersList() {
     const [users, setUsers] = useState([]);
@@ -43,7 +44,8 @@ function UsersList() {
         },
         {
             title: 'Created at',
-            dataIndex: 'createdAt'
+            dataIndex: 'createdAt',
+            render: (record, text) => dayjs(record.createdAt).format("DD-MM-YYYY")
         },
         {
             title: 'Actions',

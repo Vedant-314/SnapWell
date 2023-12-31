@@ -1,18 +1,22 @@
 import { Button, Col, Form, Input, Row, TimePicker } from 'antd'
-import moment from 'moment'
 import React from 'react'
+import dayjs from 'dayjs'
 
 function DoctorForm({onFinish, initialValues}) {
   return (
-    <Form layout='vertical' onFinish={onFinish} initialValues={{
-        ...initialValues,
-        ...(initialValues && {
-            timings : [
-                moment(initialValues?.timings[0], 'HH:mm'),
-                moment(initialValues?.timings[1], 'HH:mm')
-            ],
-        }),
-    }}>
+    <Form
+    layout="vertical"
+    onFinish={onFinish}
+    initialValues={{
+      ...initialValues,
+      ...(initialValues && {
+        timings: [
+          dayjs(initialValues?.timings[0], "HH:mm"),
+          dayjs(initialValues?.timings[1], "HH:mm"),
+        ],
+      }),
+    }}
+    >
             <h2 className='card-title mt-3'>Personal Information</h2>
             <Row gutter={20}>
                 <Col span={8} xs={24} sm={24} lg={8}>
@@ -60,9 +64,14 @@ function DoctorForm({onFinish, initialValues}) {
                     </Form.Item>
                 </Col>
                 <Col span={8} xs={24} sm={24} lg={8}>
-                    <Form.Item required label="Timings" name="timings" rules={[{required: true}]}>
-                        <TimePicker.RangePicker format='hh:mm'/>
-                    </Form.Item>
+                <Form.Item
+                    required
+                    label="Timings"
+                    name="timings"
+                    rules={[{ required: true }]}
+                >
+                <TimePicker.RangePicker format="HH:mm"/>
+                </Form.Item>
                 </Col>
             </Row>
             <div className='d-flex justify-content-end'>

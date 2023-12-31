@@ -65,7 +65,7 @@ function Layout({children}) {
     },
     {
         name: "Appointments",
-        path: "/admin/userslist",
+        path: "/doctor/appointments",
         icon: "ri-team-line"
     },
     {
