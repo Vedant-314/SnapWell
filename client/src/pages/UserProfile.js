@@ -5,7 +5,6 @@ import { hideLoading, showLoading } from "../redux/alertsSlice";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { Col, Row } from "antd";
 
 function UserProfile() {
   const [user, setUser] = useState([]);
