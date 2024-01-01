@@ -77,10 +77,6 @@ function Layout({children}) {
     
   ];
 
-  const goTo = (menu) =>{
-    navigate(menu.path)
-}
-
 
   const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
   const role = user?.isAdmin ? "ADMIN" : user?.isDoctor ? "DOCTOR" : "USER";
