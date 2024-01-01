@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
+
 const dbConfig = require('./config/dbConfig')
 app.use(express.json());
 const userRoute = require("./routes/userRoute")
@@ -18,5 +19,8 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.resolve(__dirname,'client/build/index.html'));
     })
 }
+app.get("/", (req,res)=>{
+    res.json("Server");
+});
 
 app.listen(port, () => console.log(`listening on port ${port}`));
