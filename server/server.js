@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000
 if(process.env.NODE_ENV === 'production'){
     app.use('/', express.static('https://snapwell.onrender.com/client/build'));
     app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'https://snapwell.onrender.com/client/build/index.html'));
+        res.sendFile(path.resolve('https://snapwell.onrender.com/client/build/index.html'));
     })
 }
 
